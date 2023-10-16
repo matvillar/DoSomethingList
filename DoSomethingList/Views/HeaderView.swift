@@ -8,11 +8,37 @@
 import SwiftUI
 
 struct HeaderView: View {
+    let darkColor: Color
+    let lightColor: Color
+    let title: String
+    let subTitle: String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        ZStack {
+            // Background with the linear gradient
+            Rectangle()
+                .fill(LinearGradient(gradient: Gradient(colors: [darkColor, lightColor]), startPoint: .leading, endPoint: .trailing))
+            
+                .ignoresSafeArea()
+            
+            
+            // Your content here
+            VStack(alignment: .center){
+                Text(title)
+                    .font(.system(size: 50)).bold()
+                    .foregroundStyle(.white)
+                
+                Text(subTitle)
+                    .font(.title)
+                    .foregroundStyle(.white)
+                Spacer()
+            }
+            .padding(.top, 40)
+        }
+        .frame(height: 300)
     }
 }
 
-#Preview {
-    HeaderView()
-}
+//#Preview {
+//    HeaderView()
+//}

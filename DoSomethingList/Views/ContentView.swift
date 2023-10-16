@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var contentViewAgent = ContentViewAgent()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+       
+        if contentViewAgent.isLoggedIn , !contentViewAgent.currentUserId.isEmpty{
+            // Signed in state
+            TabView {
+                AllToDosItemsView(userId: contentViewAgent.currentUserId)
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+                ProfileView()
+                    .tabItem {
+                        Label( "Profile", systemImage: "person.circle")
+                    }
+            }
+        } else {
+            LoginView()
+            
         }
-        .padding()
     }
 }
 
